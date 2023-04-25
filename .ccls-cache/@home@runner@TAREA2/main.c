@@ -168,10 +168,10 @@ void importarArchivo(Map *jugadores) {
 
 void exportarArchivo(Map* jugadores) {
 //ARREGLAR CASO DE MUCHOS ITEMS
-    //test.cvs es de prueba, falta agregar lectura de nombre
-  FILE* fp = fopen("test.cvs", "w");
+    //test.csv es de prueba, falta agregar lectura de nombre
+  FILE* fp = fopen("test.csv", "w");
   if (fp == NULL) {
-    printf("Error al abrir/crear archivo %s\n", "test.cvs");
+    printf("Error al abrir/crear archivo %s\n", "test.csv");
     return;
   }
   //encabezados/headers
