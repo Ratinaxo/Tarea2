@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-typedef struct{
+//asdsadasdasdasd
+typedef struct {
   int ph;
   char *nombreItem;
 } accion;
@@ -58,7 +58,7 @@ void menuTexto(int *opcion) {
     }
     printf("Entrada invalida, ingrese una opcion valida entre 0 y 9\n");
   }
-} // Importado de Tarea 1.
+} // Importado de Tarea 1. LISTO
 
 void crearPerfil(Map *jugadores) {
 
@@ -68,7 +68,7 @@ void crearPerfil(Map *jugadores) {
   scanf("%s[^\n]", nombre);
   getchar();
 
-  aux->nombre = (char *)malloc(sizeof(char) * (strlen(nombre)+1));
+  aux->nombre = (char *)malloc(sizeof(char) * (strlen(nombre) + 1));
   strcpy(aux->nombre, nombre);
   aux->cantItems = 0;
   aux->ph = 0;
@@ -76,7 +76,7 @@ void crearPerfil(Map *jugadores) {
   aux->accionJ = stack_create();
 
   insertMap(jugadores, aux->nombre, aux);
-}
+} // LISTO
 
 void mostrarPerfil(Map *jugadores) {
   char nombre[50];
@@ -107,25 +107,25 @@ void mostrarPerfil(Map *jugadores) {
     item = nextMap(invJugador);
   }
   printf("\n*****************\n");
-}
+} // LISTO
 
 void agregarItem(Map *jugadores) {
-  char item[50], nombre[50]; //usar array dinamico
+  char item[50], nombre[50]; // usar array dinamico
   char *itemD;
   puts("\nIngrese el nombre del jugador:");
   scanf("%s[^\n]", nombre);
   getchar();
   jugador *aux = searchMap(jugadores, nombre);
-  
+
   if (aux == NULL) {
     puts("El jugador buscado no se encuentra registrado.\n");
     return;
-    
+
   } else {
     puts("\nIngrese el nombre del item:");
     scanf("%s[^\n]", item);
-    itemD = (char*)malloc(sizeof(char) * (strlen(item) +1));
-    strcpy(itemD,item);
+    itemD = (char *)malloc(sizeof(char) * (strlen(item) + 1));
+    strcpy(itemD, item);
     insertMap(aux->inventario, itemD, itemD);
     aux->cantItems++; // aqui en teoria se agrega un item al mapa de inventario
 
@@ -137,17 +137,13 @@ void agregarItem(Map *jugadores) {
   char *test = stack_top(aux->accionJ);
   printf("\nTEST : %s", test);
   */
-}
+} // LISTO
 
-/*void eliminarItem(Map *jugadores, char *item) {}
-*/
+void eliminarItem(Map *jugadores, char *item) {}
+
 void agregarPH(Map *jugadores) {}
 
-void mostrarItemEspecifico(Map *jugadores, char *item)
-{
-
-
-}
+void mostrarItemEspecifico(Map *jugadores, char *item) {}
 void deshacerUltima(Map *jugadores) {}
 
 void importarArchivo(Map *jugadores) {
@@ -164,43 +160,39 @@ void importarArchivo(Map *jugadores) {
   char buffer[1024];
 
   */
-}
+} // en DESARROLLO
 
-void exportarArchivo(Map* jugadores) {
-//ARREGLAR CASO DE MUCHOS ITEMS
-    //test.csv es de prueba, falta agregar lectura de nombre
-  FILE* fp = fopen("test.csv", "w");
+void exportarArchivo(Map *jugadores) {
+  // ARREGLAR CASO DE MUCHOS ITEMS
+  // test.csv es de prueba, falta agregar lectura de nombre
+  FILE *fp = fopen("test.csv", "w");
   if (fp == NULL) {
     printf("Error al abrir/crear archivo %s\n", "test.csv");
     return;
   }
-  //encabezados/headers
+  // encabezados/headers
   fprintf(fp, "nombre,ph,item1,item2,item3\n");
 
-
-  void* key = firstMap(jugadores);
+  void *key = firstMap(jugadores);
   while (key != NULL) {
-    jugador* info = (jugador*) searchMap(jugadores, key);
-
+    jugador *info = (jugador *)searchMap(jugadores, key);
 
     fprintf(fp, "%s,%i,", info->nombre, info->ph);
 
-
-    Map* invJugador = info->inventario;
-    void* item = firstMap(invJugador);
+    Map *invJugador = info->inventario;
+    void *item = firstMap(invJugador);
     while (item != NULL) {
-      fprintf(fp, "%s,", (char*)item);
+      fprintf(fp, "%s,", (char *)item);
       item = nextMap(invJugador);
     }
-
 
     fprintf(fp, "\n");
 
     key = nextMap(jugadores);
   }
- printf("Se ha exportado correctamente\n\n");
+  printf("Se ha exportado correctamente\n\n");
   fclose(fp);
-}
+} // en DESARROLLO
 
 int main() {
   int opcion;
@@ -219,20 +211,20 @@ int main() {
       mostrarPerfil(jugadores);
       break;
     case 3:
-      //printf("¿Que item deasea agregar?"); // lo comento pq estoy probando lo de la pila para el deshacer :)
+      // printf("¿Que item deasea agregar?"); // lo comento pq estoy probando lo
+      // de la pila para el deshacer :)
       agregarItem(jugadores);
       break;
     case 4:
-      
-      
-      //eliminarItem(jugadores, item);
+
+      // eliminarItem(jugadores, item);
       break;
     case 5:
       agregarPH(jugadores);
       break;
     case 6:
-      
-      //mostrarItemEspecifico(jugadores, item);
+
+      // mostrarItemEspecifico(jugadores, item);
       break;
     case 7:
       deshacerUltima(jugadores);
