@@ -1,14 +1,14 @@
 #include "Map.h"
+#include "stack.h"
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 typedef struct{
-
-
-
-} acciones;
+  int ph;
+  char *nombreItem;
+} accion;
 
 typedef struct {
 
@@ -16,7 +16,7 @@ typedef struct {
   int ph;
   int cantItems;
   Map *inventario;
-  acciones accionJ;
+  Stack *accionJ;
 } jugador;
 
 int is_equal_string(void *key1, void *key2) {
@@ -73,6 +73,7 @@ void crearPerfil(Map *jugadores) {
   aux->cantItems = 0;
   aux->ph = 0;
   aux->inventario = createMap(is_equal_string);
+  aux->accionJ = stack_create();
 
   insertMap(jugadores, aux->nombre, aux);
 }
@@ -127,27 +128,26 @@ void agregarItem(Map *jugadores) {
     strcpy(itemD,item);
     insertMap(aux->inventario, itemD, itemD);
     aux->cantItems++; // aqui en teoria se agrega un item al mapa de inventario
+
+    stack_push(aux->accionJ, itemD); // se añade a la pila la ultima accion
   }
 
   // probando
-  jugador *info = searchMap(
-      jugadores, nombre); // aqui reviso se actualizo en el mapa jugador
-  char *obj = (char *)firstMap(info->inventario); //
-  printf("- %s\n",
-         obj); // y en teoria se muestra correctamente pero al llamar a
-               // mostrarPerfil y practicamente hacer lo mismo que esta escrito
-               // aca, este me muestra el nombre del jugador, no tengo idea de
-               // como sucede eso, deber haber un problema entre medio, tal vez
-               // en el uso de las funciones tipo mapa pero realmente no
-               // entiendo que suecede
+  /*
+  char *test = stack_top(aux->accionJ);
+  printf("\nTEST : %s", test);
+  */
 }
 
-void eliminarItem(Map *jugadores) {}
-
+/*void eliminarItem(Map *jugadores, char *item) {}
+*/
 void agregarPH(Map *jugadores) {}
 
-void mostrarItemEspecifico(Map *jugadores) {}
+void mostrarItemEspecifico(Map *jugadores, char *item)
+{
 
+
+}
 void deshacerUltima(Map *jugadores) {}
 
 void importarArchivo(Map *jugadores) {
@@ -219,16 +219,20 @@ int main() {
       mostrarPerfil(jugadores);
       break;
     case 3:
+      //printf("¿Que item deasea agregar?"); // lo comento pq estoy probando lo de la pila para el deshacer :)
       agregarItem(jugadores);
       break;
     case 4:
-      eliminarItem(jugadores);
+      
+      
+      //eliminarItem(jugadores, item);
       break;
     case 5:
       agregarPH(jugadores);
       break;
     case 6:
-      mostrarItemEspecifico(jugadores);
+      
+      //mostrarItemEspecifico(jugadores, item);
       break;
     case 7:
       deshacerUltima(jugadores);
