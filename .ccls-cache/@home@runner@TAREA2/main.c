@@ -165,7 +165,7 @@ void eliminarItem(Map *jugadores){
 
 void agregarPH(Map *jugadores) {}
 
-void mostrarItemEspecifico(Map *jugadores, char *item) {}
+//void mostrarItemEspecifico(Map *jugadores, char *item) {}
 void deshacerUltima(Map *jugadores) {}
 
 void importarArchivo(Map *jugadores) {
@@ -239,14 +239,14 @@ int main() {
       break;
     case 4:
 
-      // eliminarItem(jugadores, item);
+      eliminarItem(jugadores);
       break;
     case 5:
       agregarPH(jugadores);
       break;
     case 6:
-
-      // mostrarItemEspecifico(jugadores, item);
+      
+      //mostrarItemEspecifico(jugadores);
       break;
     case 7:
       deshacerUltima(jugadores);
