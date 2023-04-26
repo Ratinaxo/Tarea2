@@ -96,7 +96,7 @@ void mostrarPerfil(Map *jugadores) {
 
   Map *invJugador = info->inventario;
   char *item =
-      (char *)firstMap(invJugador); // llamoa l primer item que hay en el mapa
+      (char *)firstMap(invJugador); // llamos l primer item que hay en el mapa
                                     // de inventario del jugador
   if (item == NULL) {
     printf("El jugador no tiene items\n");
@@ -139,7 +139,20 @@ void agregarItem(Map *jugadores) {
   */
 } // LISTO
 
-void eliminarItem(Map *jugadores, char *item) {}
+void eliminarItem(Map *jugadores){
+  char item[101], nombre[101];
+  
+  puts("\nIngrese el nombre del jugador:");
+  scanf("%s[^\n]", nombre);
+  getchar();
+  jugador *aux = searchMap(jugadores, nombre);
+  if (aux == NULL){
+    puts("El jugador no se encuentra registrado.\n");
+    return;
+  }
+  puts("\nIngrese el nombre del item:");
+  scanf("%s[^\n]", item);
+}
 
 void agregarPH(Map *jugadores) {}
 
