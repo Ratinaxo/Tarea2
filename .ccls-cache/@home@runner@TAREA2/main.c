@@ -152,6 +152,15 @@ void eliminarItem(Map *jugadores){
   }
   puts("\nIngrese el nombre del item:");
   scanf("%s[^\n]", item);
+  void *itemAux = searchMap(aux->inventario, item);
+  if (itemAux == NULL){
+    puts("El item no se encuentra en el inventario del jugador.");
+    return;
+  }
+  eraseMap(aux->inventario, item);
+  aux->cantItems--;
+  printf("El item fue eliminado del inventario del jugador");
+  return;
 }
 
 void agregarPH(Map *jugadores) {}
